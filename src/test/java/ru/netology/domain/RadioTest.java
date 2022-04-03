@@ -6,50 +6,67 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class RadioTest {
     //тесты изменения уровня громкости
-    Radio vol = new Radio();
+    Radio radioObject = new Radio();
 
     @Test
     public void increaseVolume() {
-        vol.setCurrentVolume(4);
-        vol.increaseVolume();
+        radioObject.setCurrentVolume(4);
+        radioObject.increaseVolume();
         int expected = 5;
-        int actual = vol.getCurrentVolume();
+        int actual = radioObject.getCurrentVolume();
 
         assertEquals(expected, actual);
     }
+
     @Test
     public void turnDownVolume() {
-        vol.setCurrentVolume(1);
-        vol.turnDownVolume();
+        radioObject.setCurrentVolume(1);
+        radioObject.turnDownVolume();
         int expected = 0;
-        int actual = vol.getCurrentVolume();
+        int actual = radioObject.getCurrentVolume();
 
         assertEquals(expected, actual);
     }
 
     @Test
     public void maxVolume() {
-        vol.setCurrentVolume(10);
-        vol.increaseVolume();
+        radioObject.setCurrentVolume(10);
+        radioObject.increaseVolume();
         int expected = 10;
-        int actual = vol.getCurrentVolume();
+        int actual = radioObject.getCurrentVolume();
+
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void maxVolume2() {
+        radioObject.setCurrentVolume(14);
+//        radioObject.increaseVolume();
+        int expected = 0;
+        int actual = radioObject.getCurrentVolume();
 
         assertEquals(expected, actual);
     }
 
     @Test
     public void minVolume() {
-        vol.setCurrentVolume(0);
-        vol.turnDownVolume();
+        radioObject.setCurrentVolume(0);
+        radioObject.turnDownVolume();
         int expected = 0;
-        int actual = vol.getCurrentVolume();
+        int actual = radioObject.getCurrentVolume();
+
+        assertEquals(expected, actual);
+    }@Test
+
+    public void minVolume2() {
+        radioObject.setCurrentVolume(-1);
+        radioObject.turnDownVolume();
+        int expected = 0;
+        int actual = radioObject.getCurrentVolume();
 
         assertEquals(expected, actual);
     }
 
     //Тесты изменения номера станции
-    Radio radioObject = new Radio();
-
     @Test
     void shouldLowNumber() {
         radioObject.setStationNumber(-1);
@@ -79,13 +96,17 @@ public class RadioTest {
 
     @Test
     public void getStationNumber() {
-        Radio st = new Radio();
-        st.setStationNumber(7);
+//        Radio st = new Radio();
+        radioObject.setStationNumber(7);
         int expected = 7;
-        int actual = st.getStationNumber();
+        int actual = radioObject.getStationNumber();
 
         assertEquals(expected, actual);
-
-
     }
+//    @Test
+//    public void setToCurrentStation(){
+//        radioObject.setToCurrentStation(8);
+//        int expected = 8;
+//        int actual = radioObject.setToCurrentStation();
+//    }
 }

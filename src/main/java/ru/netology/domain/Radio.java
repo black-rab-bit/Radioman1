@@ -2,60 +2,70 @@ package ru.netology.domain;
 
 public class Radio {
 
-    //изменение уровня громкости
-    public void increaseVolume() {
-        if (currentVolume < 10) {
-            currentVolume = currentVolume + 1;
-        }
+    private int stationNumber = 10;
+    private int currentVolume;
+    private int currentStation;
+    private int minVolume = 0;
+    private int maxVolume = 100;
+
+    public Radio() {
     }
 
-    public void turnDownVolume() {
-        if (currentVolume > 0) {
-            currentVolume = currentVolume - 1;
-        }
+    public Radio(int stationNumber) {
+        this.stationNumber = stationNumber;
     }
-    private int currentVolume;
 
     public int getCurrentVolume() {
         return currentVolume;
     }
 
+    public int getStationNumber() {
+        return stationNumber;
+    }
+
+    public int getCurrentStation (){
+        return currentStation;
+    }
+    public void setCurrentStation(int currentStation) {
+        if ((currentStation <= (stationNumber - 1)) && (currentStation > 0)) {
+            this.currentStation = currentStation;
+        }
+    }
+
     public void setCurrentVolume(int currentVolume) {
-        if (currentVolume > 10) {
+        if (currentVolume > maxVolume) {
             return;
         }
-        if (currentVolume < 0) {
+        if (currentVolume < minVolume) {
             return;
         }
         this.currentVolume = currentVolume;
     }
 
-//    public void increaseVolume() {
-//
-//        setCurrentVolume(currentVolume + 1);
-//    }
-
-
-    //изменение выбранного номера радиостанции
-    private int stationNumber;
-
-    public int getStationNumber() {
-        return stationNumber;
+    public void nextStationNumber() {
+        if (currentStation == (stationNumber - 1)) {
+            currentStation = 0;
+            return;
+        }
+        setCurrentStation(++currentStation);
+    }
+    public void prevStationNumber(){
+        if (currentStation == 0) {
+            currentStation = stationNumber - 1;
+            return;
+        }
+        setCurrentStation(--currentStation);
     }
 
-    public void setStationNumber(int newStationNumber) {
-        if (newStationNumber > 9) {
-            newStationNumber = 0;
+    public void increaseVolume() {
+        if (currentVolume < maxVolume) {
+            currentVolume = currentVolume + 1;
         }
-        if (newStationNumber < 0) {
-            newStationNumber = 9;
-        }
-        stationNumber = newStationNumber;
     }
 
-    public void setToCurrentStation(int stationNumber) {
-        if ((stationNumber <= 9) && (stationNumber >= 0)) {
-            this.stationNumber = stationNumber;
+    public void turnDownVolume() {
+        if (currentVolume > minVolume) {
+            currentVolume = currentVolume - 1;
         }
     }
 }
